@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    color:red;
+}
+#padre{
+    width: 100vw;
+    height: 100vw;
+    background-color: #333;
+    display: flex;
+    flex-wrap: wrap; /* permite que los hijos se ajusten a la pantalla */
+    gap: 20px; /* distancia entre los hijos, como marggin */
+    justify-content: center; /* alinea los hijos en el eje principal */
+    align-items: center; /*alinea los hijos sobre el ejen secundario */
+    justify-content: space-around; /*  */
+
+
+    
+}
+
+.hijo{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background-color: red;
+    border:2px solid black;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    /* align-content: center; */
+
+}
