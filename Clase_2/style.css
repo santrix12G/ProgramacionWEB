@@ -2,3 +2,33 @@ h1::first-letter{
     color:red;
     font-size: 80px;
 }
+
+
+:is(#elemento1,#elemento2,#elemento3,#elemento4){
+    background-color: red;
+    margin:20px;
+    width: 100px;
+    height: 100px;
+    padding: 30px;
+}
+
+#elemento1{
+    display: inline-block;
+    background-color:green;
+}
+#elemento2{
+    display: inline-block;
+}
+
+.inlineblocks{
+    border: 10px solid black;
+}
+
+.inline{
+    border:2px solid #022;
+    padding: 20px;
+    /* width: 100px; no permite cambiar el ancho */
+    /* height: 100px;  no permite tampoco cambiar el alto*/
+}
+
+
