@@ -1,0 +1,47 @@
+#cajaprincipal{
+    background-color: blue;
+    /* display: flex; */
+    width: 100vw;
+    height: 100vw;
+    gap: 30px;
+}
+#cajaprincipal :is(#caja1,#caja2){
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    border:1px solid white;
+    margin: 2px;
+}
+#caja1{
+    flex-wrap: wrap;
+}
+
+.cuadrado{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    background-color: orangered;
+    border: 3px solid black;
+    align-items: center;
+}
+.circulo{
+    width: 20%;
+    height: 40%;
+    background-color: yellow;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    border:3px solid black;
+    align-items: center;
+}
+
+.cuadrado-circulo{
+    background-color: orangered;
+    border: 2px solid black;
+    width: 20%;
+    height: 20%
+}
