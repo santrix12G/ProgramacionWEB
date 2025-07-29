@@ -1,45 +1,55 @@
-#cajaprincipal{
+#cajaprincipal {
     background-color: blue;
     /* display: flex; */
     width: 100vw;
     height: 100vw;
     gap: 30px;
 }
-#cajaprincipal :is(#caja1,#caja2){
+
+#cajaprincipal :is(#caja1, #caja2) {
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 50vw;
-    border:1px solid white;
+    border: 1px solid white;
     margin: 2px;
 }
-#caja1{
+
+#caja1 {
     flex-wrap: wrap;
 }
 
-.cuadrado{
+.cuadrado {
     display: flex;
-    width: 12vw;
-    height: 12vw;
+    /* flex: 1 1 auto; */
+    width: 20vw;
+    height: 20vw;
     justify-content: center;
     background-color: orangered;
     border: 3px solid black;
     align-items: center;
+    overflow: hidden;
+    /* Oculta el exceso */
+    overflow: auto;
+    /* Muestra scroll si se sale */
+    overflow-x: hidden;
+    /* Control horizontal */
 }
-.circulo{
+
+.circulo {
     width: 20%;
     height: 40%;
     background-color: yellow;
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    border:3px solid black;
+    border: 3px solid black;
     align-items: center;
 }
 
-.cuadrado-circulo{
+.cuadrado-circulo {
     background-color: orangered;
     border: 2px solid black;
     width: 20%;
