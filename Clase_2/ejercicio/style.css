@@ -3,8 +3,7 @@
     display: flex;
     flex-direction: column;
     /* display: flex; */
-    width: 100vw;
-    height: 100vw;
+    min-height: 100vh;
     gap: 30px;
 }
 
@@ -23,25 +22,27 @@
     flex-wrap: wrap;
 }
 #caja2{
-    height: 50vw;
+    height: 80vh;
 }
 
 .cuadrado {
     display: flex;
     /* flex: 1 1 auto; */
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     justify-content: center;
     background-color: orangered;
     border: 3px solid black;
     align-items: center;
+    margin-bottom: 20px;
+    padding: 20x;
 }
 
 .circulo {
     width: 20%;
-    height: 40%;
+    aspect-ratio: 1/1;
     background-color: yellow;
-    border-radius: 50%;
+    border-radius: 100%;
     display: flex;
     justify-content: center;
     border: 3px solid black;
