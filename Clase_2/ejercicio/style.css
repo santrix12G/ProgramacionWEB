@@ -1,5 +1,7 @@
 #cajaprincipal {
-    background-color: blue;
+    background-color: rgb(199, 199, 254);
+    display: flex;
+    flex-direction: column;
     /* display: flex; */
     width: 100vw;
     height: 100vw;
@@ -12,7 +14,7 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 50vw;
+    /* height: 50vw; */
     border: 1px solid white;
     margin: 2px;
 }
@@ -20,22 +22,19 @@
 #caja1 {
     flex-wrap: wrap;
 }
+#caja2{
+    height: 50vw;
+}
 
 .cuadrado {
     display: flex;
     /* flex: 1 1 auto; */
-    width: 20vw;
-    height: 20vw;
+    width: 200px;
+    height: 200px;
     justify-content: center;
     background-color: orangered;
     border: 3px solid black;
     align-items: center;
-    overflow: hidden;
-    /* Oculta el exceso */
-    overflow: auto;
-    /* Muestra scroll si se sale */
-    overflow-x: hidden;
-    /* Control horizontal */
 }
 
 .circulo {
