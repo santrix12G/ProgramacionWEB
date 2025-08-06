@@ -1,0 +1,29 @@
+#container{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-areas:
+    "header header header"
+    "section article aside"
+    "footer footer aside";
+    background-color: red;
+}
+
+header{
+    grid-area: header;
+    background-color: blue;
+}
+section{
+    grid-area: section;
+    background-color: orange;
+}
+article{
+    grid-area: article;
+    background-color: lightseagreen;
+}
+aside{
+    grid-area: aside;
+    background-color: rebeccapurple;
+}
