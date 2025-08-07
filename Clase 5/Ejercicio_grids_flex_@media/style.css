@@ -16,7 +16,7 @@ body {
         "cabezal cabezal cabezal cabezal"
         "navegacion navegacion navegacion navegacion"
         "main-hero main-hero main-hero main-hero"
-        "article article article article"
+        "article1 article2 article3 article4"
         "main-service1 main-service1 main-service1 main-service1"
         "main-service2 main-service2 main-service2 main-service2"
         "main-service3 main-service3 main-service3 main-service3"
@@ -37,10 +37,10 @@ body {
             "cabezal"
             "navegacion"
             "main-hero"
-            "article"
-            "article"
-            "article"
-            "article"
+            "article1"
+            "article2"
+            "article3"
+            "article4"
             "main-service1"
             "main-service2"
             "main-service3"
@@ -61,8 +61,8 @@ body {
             "cabezal cabezal"
             "navegacion navegacion"
             "main-hero main-hero"
-            "article article"
-            "article article"
+            "article1 article2"
+            "article3 article4"
             "main-service1 main-service1"
             "main-service2 main-service2"
             "main-service3 main-service3"
@@ -71,6 +71,37 @@ body {
         ;
     }
 
+    .navegacion {
+        grid-area: navegacion;
+        display: flex;
+        justify-content: space-between;
+        background-color: #F8F6EF;
+    }
+
+    .navegacion--titulo {
+        display: flex;
+        align-items: center;
+        background-color: #655D57;
+        margin: 0.5rem;
+        width: 10%;
+        height: 2rem;
+        color: transparent
+    }
+
+    .navegacion__lista {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 90%;
+    }
+
+    .navegacion__lista--item {
+        list-style: none;
+        height: 1.25rem;
+        width: 2rem;
+        background-color: #9CACC7;
+        color: transparent;
+    }
 }
 
 .cabezal {
@@ -84,7 +115,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 40px;
+    gap: 2rem;
     margin-right: 150px;
 }
 
@@ -118,7 +149,7 @@ body {
 
 .navegacion__lista {
     display: flex;
-    gap: 40px;
+    gap: 1.5rem;
     justify-content: center;
     align-items: center;
 
@@ -138,6 +169,7 @@ body {
     grid-area: main-hero;
     background-color: #DEE8F1;
     border: 2px solid black;
+    padding: 5% 10% 5% 5%;
 }
 
 .main-hero--subtitulo {
@@ -203,39 +235,35 @@ body {
     margin-left: -10px;
 }
 
-.article {
+/* .article {
     grid-area: article;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
+} */
 
 .article1 {
-    width: 25%;
     border: 2px solid black;
     background-color: #7B9BC0;
 }
 
 .article2 {
-    width: 25%;
     border: 2px solid black;
     background-color: #A4B9D6;
 }
 
 .article3 {
-    width: 25%;
     border: 2px solid black;
     background-color: #D8E1EE;
 }
 
 .article4 {
-    width: 25%;
     border: 2px solid black;
     background-color: #B8C6DF;
 }
 
 /* estilos a los subtitulos de cada articulo */
-.article :is(.article1--subtitulo,
+:is(.article1--subtitulo,
     .article2--subtitulo,
     .article4--subtitulo, .article3--subtitulo) {
     padding: 1rem;
@@ -245,7 +273,7 @@ body {
 }
 
 /* estilos a cada parrafo de cada articulo */
-.article :is(.article1--parrafo,
+:is(.article1--parrafo,
     .article2--parrafo,
     .article3--parrafo,
     .article4-parrafo) {
@@ -256,7 +284,7 @@ body {
     width: 90%;
 }
 
-.article :is(.article1__contenedor-boton,
+:is(.article1__contenedor-boton,
     .article2__contenedor-boton,
     .article3__contenedor-boton,
     .article4__contenedor-boton) {
@@ -267,7 +295,7 @@ body {
 }
 
 
-.article :is(.article1--boton,
+:is(.article1--boton,
     .article2--boton,
     .article3--boton,
     .article4--boton) {
@@ -329,31 +357,33 @@ body {
 /* Párrafos de cada main-service */
 :is(.main-service1--parrafo, .main-service2--parrafo, .main-service3--parrafo) {
     color: #655D57;
+    /* font-size: 1rem; */
     margin: 1rem;
     margin-left: 3.7rem;
+    height: 70%;
     width: 50%;
 }
 
 /* Imágenes responsivas en main-services */
 :is(.main-service1--imagen, .main-service2--imagen, .main-service3--imagen) {
-    width: 50%;
-    max-width: 300px;
-    height: auto;
+    width: 30%;
     display: block;
     margin: 1rem auto;
     /* border: 2px solid #655D57; */
+    border-radius: 50%;
     padding: 0.5rem;
     position: relative;
     bottom: 2rem;
 }
-
-:is(.main-service1__contenedor-boton,
-    .main-service2__contenedor-boton,
-    .main-service3__contenedor-boton) {
-    position: relative;
-    bottom: 6rem;
-
+@media(min-width:1024px){
+    :is(.main-service1__contenedor-boton,
+        .main-service2__contenedor-boton,
+        .main-service3__contenedor-boton) {
+        position: relative;
+        bottom: 10%;
+    }
 }
+
 
 .enlaces {
     grid-area: enlaces;
@@ -374,35 +404,41 @@ body {
 }
 
 .enlaces--subtitulo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 2rem;
     /* 32px */
     margin-left: 3.7rem;
     padding: 1rem;
     color: #F8F6EF;
 }
+.enlaces__contenedor__separador{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
 
 .enlaces__contenedor--contacto {
-    width: 50%;
-    height: 50%;
-    margin-left: 3.7rem;
-    margin-bottom: 2rem;
+    width: 80%;
+    /* height: 10%; */
+    min-height: 100%;
+    margin:3%;
+    margin-left: 5%;
     background-color: #B0C2DA;
-    /* display: flex;
-    flex-direction: column; */
-    display: inline-block;
 }
 
 .enlaces__lista {
-    display: inline-block;
-    /* flex-direction: column; */
+    width: 20%;
+    margin:3%;
 }
 
 .enlaces__lista--item {
     background-color: #B0C2DA;
     color: transparent;
-    width: 5rem;
+    width: 70%;
     height: 0.7rem;
-    margin: 1rem;
+    margin: 20%;
 }
 
 .enlaces__contenedor-social {
@@ -413,6 +449,7 @@ body {
     gap: 1rem;
 }
 
+/* parte de las redes sociales */
 .enlaces--subtitulo-social {
     color: #F8F6EF;
     font-size: 2rem;
