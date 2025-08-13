@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego 2D - Mover y Saltar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .game-area {
+            width: 800px;
+            height: 400px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%);
+            border: 3px solid #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .player {
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border: 2px solid #333;
+            border-radius: 8px;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            transition: transform 0.1s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .player.jumping {
+            animation: jump 0.6s ease-out;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-120px); }
+        }
+
+        .ground {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, #8B4513, #A0522D);
+            position: absolute;
+            bottom: 0;
+            border-top: 2px solid #654321;
+        }
+
+        .obstacle {
+            width: 30px;
+            height: 50px;
+            background: linear-gradient(45deg, #FF8C00, #FF6347);
+            border: 2px solid #8B0000;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            right: -30px;
+            animation: moveLeft 3s linear infinite;
+        }
+
+        @keyframes moveLeft {
+            from { right: -30px; }
+            to { right: 100%; }
+        }
+
+        .cloud {
+            position: absolute;
+            color: white;
+            font-size: 30px;
+            animation: float 8s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            from { left: -50px; }
+            to { left: 100%; }
+        }
+
+        .controls {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #dee2e6;
+        }
+
+        .controls h3 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .controls p {
+            color: #6c757d;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .restart-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .restart-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🏃‍♂️ Juego 2D - Correr y Saltar</h1>
+        
+        <div class="score">Puntuación: <span id="score">0</span></div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="player" id="player"></div>
+            <div class="ground"></div>
+            <div class="obstacle" id="obstacle"></div>
+            <div class="cloud" style="top: 30px; animation-delay: 0s;">☁️</div>
+            <div class="cloud" style="top: 80px; animation-delay: 2s;">☁️</div>
+            <div class="cloud" style="top: 120px; animation-delay: 4s;">☁️</div>
+            
+            <div class="game-over" id="gameOver">
+                <h2>¡Game Over!</h2>
+                <p>Puntuación final: <span id="finalScore">0</span></p>
+                <button class="restart-btn" onclick="restartGame()">Jugar de nuevo</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <h3>🎮 Controles</h3>
+            <p><strong>Flechas:</strong> Mover izquierda/derecha</p>
+            <p><strong>Barra espaciadora:</strong> Saltar</p>
+            <p><strong>Objetivo:</strong> Evita los obstáculos y consigue la mayor puntuación</p>
+        </div>
+    </div>
+
+    <script>
+        const player = document.getElementById('player');
+        const obstacle = document.getElementById('obstacle');
+        const gameArea = document.getElementById('gameArea');
+        const scoreElement = document.getElementById('score');
+        const gameOverElement = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+
+        let playerX = 50;
+        let playerY = 0;
+        let isJumping = false;
+        let score = 0;
+        let gameRunning = true;
+        let keys = {};
+
+        // Configuración del juego
+        const PLAYER_SPEED = 5;
+        const JUMP_HEIGHT = 120;
+        const GAME_AREA_WIDTH = 800;
+        const PLAYER_WIDTH = 40;
+
+        // Event listeners para teclas
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+            
+            // Prevenir scroll con barra espaciadora
+            if (e.code === 'Space') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.code] = false;
+        });
+
+        // Función de salto
+        function jump() {
+            if (!isJumping) {
+                isJumping = true;
+                player.classList.add('jumping');
+                
+                setTimeout(() => {
+                    isJumping = false;
+                    player.classList.remove('jumping');
+                }, 600);
+            }
+        }
+
+        // Función para mover el jugador
+        function movePlayer() {
+            if (keys['ArrowLeft'] && playerX > 0) {
+                playerX -= PLAYER_SPEED;
+            }
+            if (keys['ArrowRight'] && playerX < GAME_AREA_WIDTH - PLAYER_WIDTH) {
+                playerX += PLAYER_SPEED;
+            }
+            if (keys['Space']) {
+                jump();
+            }
+            
+            player.style.left = playerX + 'px';
+        }
+
+        // Función para detectar colisiones
+        function checkCollision() {
+            const playerRect = player.getBoundingClientRect();
+            const obstacleRect = obstacle.getBoundingClientRect();
+            
+            return !(playerRect.right < obstacleRect.left || 
+                    playerRect.left > obstacleRect.right || 
+                    playerRect.bottom < obstacleRect.top || 
+                    playerRect.top > obstacleRect.bottom);
+        }
+
+        // Función para actualizar puntuación
+        function updateScore() {
+            score++;
+            scoreElement.textContent = score;
+        }
+
+        // Función para game over
+        function gameOver() {
+            gameRunning = false;
+            finalScoreElement.textContent = score;
+            gameOverElement.style.display = 'block';
+        }
+
+        // Función para reiniciar el juego
+        function restartGame() {
+            score = 0;
+            playerX = 50;
+            isJumping = false;
+            gameRunning = true;
+            player.classList.remove('jumping');
+            player.style.left = playerX + 'px';
+            scoreElement.textContent = score;
+            gameOverElement.style.display = 'none';
+        }
+
+        // Bucle principal del juego
+        function gameLoop() {
+            if (gameRunning) {
+                movePlayer();
+                
+                // Verificar colisión
+                if (checkCollision()) {
+                    gameOver();
+                }
+                
+                // Actualizar puntuación cada frame
+                updateScore();
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Iniciar el juego
+        gameLoop();
+
+        // Agregar efectos de sonido simulados (comentados por simplicidad)
+        // En un juego real, aquí agregarías efectos de sonido
+        console.log('🎮 Juego iniciado! Usa las flechas para mover y la barra espaciadora para saltar.');
+    </script>
+</body>
+</html> 
