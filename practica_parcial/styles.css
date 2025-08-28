@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* configuracion de la parte movil */
+
+@media (max-width:768px){
+
+    .cuadrado{
+        display: none;
+    }
+
+    .cuerpo{
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 1fr 10fr 1fr 2fr;
+        grid-template-areas: 
+        "cabecal"
+        "nav"
+        "main"
+        "aside"
+        "footer";
+    }
+
+    body section{
+        display: flex;
+       flex-direction: column;
+    }
+    body article{
+        width: 90%;
+        height: 40%;
+
+    }
+}
+
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 4fr 2fr;
+    grid-template-areas: 
+    "cabecal cabecal cabecal"
+    "nav nav nav"
+    "aside main main"
+    "footer footer footer";
+    
+}
+
+.cabecal{
+    grid-area: cabecal;
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+}
+
+.cuadrado{
+    width: 50px;
+    height: 50px;
+    background-color: yellow;
+    border: 2px solid red;
+
+}
+
+nav{
+    grid-area: nav;
+    background-color: blue;
+}
+
+aside{
+    grid-area:aside;
+    background-color: red;
+}
+
+main{
+    grid-area: main;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+}
+
+section{
+    background-color: green;
+    width: 95%;
+    height: 40%;
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+article{
+    width: 45%;
+
+    height: 80%;
+    background-color: gray;
+}
+
+footer{
+    grid-area:footer;
+    background-color: black;
+}
